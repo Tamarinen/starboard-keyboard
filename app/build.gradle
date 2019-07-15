@@ -1,0 +1,23 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 8
+    buildToolsVersion "28.0.3"
+
+    defaultConfig {
+        applicationId "org.dyndns.fules.ck"
+        minSdkVersion 7
+        targetSdkVersion 8
+
+        ndk {
+            moduleName "symlink"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
