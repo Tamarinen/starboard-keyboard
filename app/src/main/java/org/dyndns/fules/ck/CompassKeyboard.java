@@ -2,6 +2,7 @@ package org.dyndns.fules.ck;
 import org.dyndns.fules.ck.R;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -9,9 +10,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.XmlResourceParser;
+import android.graphics.BitmapFactory;
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.KeyboardView.OnKeyboardActionListener;
 import android.inputmethodservice.KeyboardView;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -21,6 +24,7 @@ import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.ExtractedText;
 import android.view.inputmethod.ExtractedTextRequest;
 import android.R.id;
+import androidx.core.app.NotificationCompat;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -53,14 +57,49 @@ public class CompassKeyboard extends InputMethodService implements KeyboardView.
 	ExtractedTextRequest		etreq = new ExtractedTextRequest();
 	int				selectionStart = -1, selectionEnd = -1;
 
+	// Notification Channel stuff, required starting with Android 26
+	public static final String NOTIFICATION_CHANNEL_ID = "ck_errors";
+	public static final String CHANNEL_NAME = "Error Notifications";
+	int error_importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+	@Override
+	public void onCreate() {
+		super.onCreate();
+
+		/*
+		 * The notification stuff doesn't work yet. Besides, I'm not entirely
+		 * convinced a notification is the best way to convey a temporary error message.
+		 */
+
+		// Notification channel should only be created for devices running Android 26 and up
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, CHANNEL_NAME, error_importance);
+			notificationChannel.enableLights(false);
+			notificationChannel.enableVibration(false);
+			notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+
+			NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+			notificationManager.createNotificationChannel(notificationChannel);
+		}
+	}
+
 	// send an auto-revoked notification with a title and a message
 	void sendNotification(String title, String msg) {
-		// Simple as a pie, isn't it...
-		Notification n = new Notification(android.R.drawable.ic_notification_clear_all, title, System.currentTimeMillis());
-		n.flags = Notification.FLAG_AUTO_CANCEL;
-		n.setLatestEventInfo(this, title, msg, PendingIntent.getActivity(this, 0, new Intent(), 0));
-		((NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE)).notify(1, n);
-		Log.e(TAG, title+"; "+msg);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			//We pass the unique channel id as the second parameter in the constructor
+			NotificationCompat.Builder notificationCompatBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+			//Title for your notification
+			notificationCompatBuilder.setContentTitle(title);
+			//Subtext for your notification
+			notificationCompatBuilder.setContentText(msg);
+			//Small Icon for your notification
+			notificationCompatBuilder.setSmallIcon(R.id.icon);
+			//Large Icon for your notification
+			notificationCompatBuilder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.id.icon));
+
+			NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+			notificationManager.notify(42, notificationCompatBuilder.build());
+		}
 	}
 
 	public void skipLayout(XmlPullParser parser) throws XmlPullParserException, IOException {

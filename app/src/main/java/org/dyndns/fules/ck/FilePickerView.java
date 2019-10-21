@@ -95,7 +95,7 @@ class FileInfoView extends LinearLayout implements Checkable, View.OnTouchListen
 		}
 
 		if (s == null)
-			dispName = file.getName();
+			dispName = file.getPath();
 		else
 			dispName = s;
 		tv.setText(dispName);
@@ -137,7 +137,7 @@ class FileInfoView extends LinearLayout implements Checkable, View.OnTouchListen
 					iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_list_active_broken));
 			}
 			else {
-				tv.setTextColor(0xffffffff);
+				tv.setTextColor(0xffff00ff);
 				if (type == TYPE_FILE)
 					iv.setImageDrawable(getResources().getDrawable(R.drawable.icon_list_passive_file));
 				else if (type == TYPE_DIR)
@@ -219,7 +219,7 @@ public class FilePickerView extends ListView implements AdapterView.OnItemClickL
 
 			item.add(0, new FileInfoView(getContext(), new File("/"), "/"));
 			File p = base.getParentFile();
-			if ((p != null) || (numFiles == 0))
+			if ((p != null)) // || (numFiles == 0))
 				item.add(1, new FileInfoView(getContext(), p, ".."));
 			numItems = item.size();
 		}

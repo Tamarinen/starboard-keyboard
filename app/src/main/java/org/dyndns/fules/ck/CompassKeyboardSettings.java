@@ -7,6 +7,7 @@ import android.preference.PreferenceActivity;
 import android.util.Log;
 import android.preference.Preference;
 import android.preference.ListPreference;
+import android.os.Environment;
 //import android.preference.PreferenceScreen;
 
 public class CompassKeyboardSettings extends PreferenceActivity {
@@ -37,7 +38,7 @@ public class CompassKeyboardSettings extends PreferenceActivity {
 			CharSequence[] entries = myCopyOf(llp.getEntries(), num_entries + 1);
 			CharSequence[] entryValues = myCopyOf(llp.getEntryValues(), num_entries + 1);
 			entries[num_entries] = "YaddaBoo";
-			entryValues[num_entries] = "/mnt/sdcard/Document/test.xml";
+			entryValues[num_entries] = Environment.getExternalStorageDirectory().getPath() + "/test.xml";
 
 			llp.setEntries(entries);
 			llp.setEntryValues(entryValues);
