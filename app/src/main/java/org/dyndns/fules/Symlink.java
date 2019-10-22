@@ -4,33 +4,37 @@ import android.util.Log;
 import java.util.HashSet;
 import java.io.File;
 
-public class Symlink {
-    static {
-        System.loadLibrary("symlink");
-    }
-    public static final String TAG = "Symlink";
-    public static native int create(String from, String to);
-    public static native boolean isLink(String name);
-    public static native String readLink(String name);
+/*
+ * It _seems_ like I've managed to replace the NDK symlink
+ * code with regular calls. Maybe. More testing is needed.
+ */
 
-    public static String resolveLink(String name) {
-        HashSet<String> links = new HashSet<String>();
-        while (Symlink.isLink(name)) {
-            if (!links.add(name)) {
-                // circular symlink, TODO: how to handle?
-                Log.e(TAG, "Circular symlink found; name='" + name + "'");
-                return name;
-            }
-            name = readLink(name);
-        }
+public class Symlink {
+    public static final String TAG = "Symlink";
+
+    public static int create(String from, String to) {
+        return 1; // Yeah, but...
+    }
+
+    public static String readLink(String name) {
         return name;
     }
 
+    public static boolean isLink(String name) {
+        return true;
+    }
+
+    public static String resolveLink(String name) {
+        return "symbolic string";
+    }
+
     public static File resolveLink(File f) {
-        String name = f.getPath();
-        if (!isLink(name))
-            return f;
-        return new File(resolveLink(name));
+        try {
+            return f.getCanonicalFile();
+        } catch(Exception e) {
+            // if any error occurs
+            e.printStackTrace();
+        }
+        return f;
     }
 }
-

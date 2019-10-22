@@ -1,10 +1,13 @@
 package org.dyndns.fules.ck;
 import org.dyndns.fules.ck.R;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.util.Log;
 import android.view.View;
 import android.app.Activity;
+import android.app.ActivityGroup;
 import android.content.Intent;
 import android.os.Bundle;
 import android.net.Uri;
@@ -12,8 +15,12 @@ import java.util.Iterator;
 import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 public class FilePicker extends Activity implements FilePickerView.ResultListener {
 	private static final String TAG = "FilePicker";
+	//private static final Integer MY_PERMISSIONS_REQUEST_READ_STORAGE = 10010;
 
 	public static final String ACTION_PICK = "org.dyndns.fules.ck.filepicker.action.PICK";
     public static final String EXTRA_PATH = "org.dyndns.fules.ck.filepicker.extra.path";
@@ -31,6 +38,24 @@ public class FilePicker extends Activity implements FilePickerView.ResultListene
 	@Override public void
 	onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		/*
+		 * This is not the way to do it in a modern app,
+		 * but we're at least not trying to read things
+		 * we're not allowed to read.
+		 */
+		Context thisActivity = getApplicationContext();
+		if (ContextCompat.checkSelfPermission(thisActivity,
+				Manifest.permission.READ_EXTERNAL_STORAGE)
+				!= PackageManager.PERMISSION_GRANTED) {
+			/*
+			 * Is it even possible to ask for permissions inside onCreate()?
+			 */
+			//ActivityCompat.requestPermissions(thisActivity,
+			// 	    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+			//    	MY_PERMISSIONS_REQUEST_READ_STORAGE);
+			setContentView(R.layout.fileaccesserror);
+			return;
+		}
 		setContentView(R.layout.filepicker);
 
 		Intent i = getIntent();
