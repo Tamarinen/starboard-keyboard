@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
-       	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:fules="http://schemas.android.com/apk/res/org.dyndns.fules.ck"
+    xmlns:android="http://schemas.android.com/apk/res/android"
 	android:title="@string/settings"
-        android:key="settings">
+    android:key="settings">
 
 	<PreferenceScreen
 		android:key="pg_feedback"

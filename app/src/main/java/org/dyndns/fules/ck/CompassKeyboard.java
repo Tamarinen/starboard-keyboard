@@ -60,7 +60,6 @@ public class CompassKeyboard extends InputMethodService implements KeyboardView.
 	// Notification Channel stuff, required starting with Android 26
 	public static final String NOTIFICATION_CHANNEL_ID = "ck_errors";
 	public static final String CHANNEL_NAME = "Error Notifications";
-	int error_importance = NotificationManager.IMPORTANCE_DEFAULT;
 
 	@Override
 	public void onCreate() {
@@ -73,6 +72,7 @@ public class CompassKeyboard extends InputMethodService implements KeyboardView.
 
 		// Notification channel should only be created for devices running Android 26 and up
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			int error_importance = NotificationManager.IMPORTANCE_DEFAULT;
 			NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, CHANNEL_NAME, error_importance);
 			notificationChannel.enableLights(false);
 			notificationChannel.enableVibration(false);

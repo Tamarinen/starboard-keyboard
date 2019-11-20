@@ -58,9 +58,6 @@
         <!-- custom layout filenames will be added/removed programmatically -->
 	</string-array>
 
-	<string name="custom_layout_positive">OK</string>
-	<string name="custom_layout_negative">Cancel</string>
-
 	<string name="portrait_only">Portrait layout only</string>
 	<string name="portrait_only_summary">Use the portrait layout even in landscape mode</string>
 
@@ -100,8 +97,10 @@
 	<string name="version_summary">v1.6pre2</string>
 
 	<string name="copyright">Copyright</string>
-	<string name="copyright_summary">2011-2014 Gabor Simon. All rights reserved, New BSD License applies.</string>
+	<string name="copyright_summary">2011–2014 Gabor Simon. All rights reserved, New BSD License applies.</string>
 	<string name="source">Source</string>
 	<string name="source_summary">$HeadURL$</string>
+	<string name="permission_error">Permission Error</string>
+	<string name="permission_to_read">Permission to read external media is needed to load extra layouts.</string>
 
 </resources>

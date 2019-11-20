@@ -1,6 +1,7 @@
 package org.dyndns.fules.ck;
 import org.dyndns.fules.ck.R;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.BitmapDrawable;
@@ -48,6 +49,7 @@ class RegexFilter implements FilenameFilter {
 	}
 }
 
+@SuppressLint("ViewConstructor")
 class FileInfoView extends LinearLayout implements Checkable, View.OnTouchListener {
 	private static final String	TAG = "FilePicker";
 	static final int		TYPE_FILE = 0;
