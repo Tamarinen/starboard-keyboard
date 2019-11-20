@@ -12,7 +12,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Permission Error"
+            android:text="@string/permission_error"
             android:textSize="30sp" />
     </TableRow>
 
@@ -24,7 +24,7 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Permission to read external media is needed to load extra layouts." />
+            android:text="@string/permission_to_read" />
     </TableRow>
 
 </TableLayout>

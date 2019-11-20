@@ -685,8 +685,8 @@ public class CompassKeyboardView extends FrameLayout {
 			// if the parent specified only a maximal width, make the row span the whole of it
 			if (android.view.View.MeasureSpec.getMode(widthMeasureSpec) == android.view.View.MeasureSpec.AT_MOST) {
 				widthMeasureSpec = android.view.View.MeasureSpec.makeMeasureSpec(
-						android.view.View.MeasureSpec.EXACTLY,
-						android.view.View.MeasureSpec.getSize(widthMeasureSpec));
+						android.view.View.MeasureSpec.getSize(widthMeasureSpec),
+						android.view.View.MeasureSpec.EXACTLY);
 
 			}
 			super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -705,8 +705,8 @@ public class CompassKeyboardView extends FrameLayout {
 		}
 
 		@Override protected void onDraw(Canvas canvas) {
-			int w = canvas.getWidth();
-			int h = canvas.getHeight();
+			int w = getWidth();
+			int h = getHeight();
 			switch (dir) {
 				case NW:
 				case SE:
@@ -791,6 +791,7 @@ public class CompassKeyboardView extends FrameLayout {
 		locks = new HashSet();
 		effectiveMods = new HashSet();
 
+		// noinspection ShowToast The showing is done later
 		toast = Toast.makeText(context, "<none>", Toast.LENGTH_SHORT);
 		toast.setGravity(Gravity.BOTTOM, 0, 0);
 	}

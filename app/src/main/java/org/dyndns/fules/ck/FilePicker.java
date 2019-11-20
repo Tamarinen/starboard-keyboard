@@ -120,7 +120,7 @@ public class FilePicker extends Activity implements FilePickerView.ResultListene
             SharedPreferences prefs = getSharedPreferences(prefName, 0);
             SharedPreferences.Editor ed = prefs.edit();
             ed.putString(prefKey, path);
-            ed.commit();
+            ed.apply();
         }
 		setResult(Activity.RESULT_OK, new Intent().setAction(ACTION_PICK).putExtra(EXTRA_PATH, path));
 		finish();
