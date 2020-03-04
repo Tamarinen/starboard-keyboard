@@ -20,10 +20,11 @@
 			<meta-data android:name="android.view.im" android:resource="@xml/method"/>
 		</service>
 
+		<!-- TODO: PreferenceActivity should not be exported -->
 		<activity
 			android:label="@string/settings"
 			android:name="CompassKeyboardSettings"
-			android:exported="false">
+			android:exported="true">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />

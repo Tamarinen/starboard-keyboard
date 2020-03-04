@@ -16,7 +16,6 @@
 
 package org.dyndns.fules.inputmethodservice;
 
-import android.annotation.UnsupportedAppUsage;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -45,33 +44,33 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.android.internal.R;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+
+import org.dyndns.fules.ck.R;
 
 /**
  * A view that renders a virtual {@link Keyboard}. It handles rendering of keys and
  * detecting key presses and touch movements.
  *
- * @attr ref android.R.styleable#KeyboardView_keyBackground
- * @attr ref android.R.styleable#KeyboardView_keyPreviewLayout
- * @attr ref android.R.styleable#KeyboardView_keyPreviewOffset
- * @attr ref android.R.styleable#KeyboardView_keyPreviewHeight
- * @attr ref android.R.styleable#KeyboardView_labelTextSize
- * @attr ref android.R.styleable#KeyboardView_keyTextSize
- * @attr ref android.R.styleable#KeyboardView_keyTextColor
- * @attr ref android.R.styleable#KeyboardView_verticalCorrection
- * @attr ref android.R.styleable#KeyboardView_popupLayout
+ * @attr ref R.styleable#KeyboardView_keyBackground
+ * @attr ref R.styleable#KeyboardView_keyPreviewLayout
+ * @attr ref R.styleable#KeyboardView_keyPreviewOffset
+ * @attr ref R.styleable#KeyboardView_keyPreviewHeight
+ * @attr ref R.styleable#KeyboardView_labelTextSize
+ * @attr ref R.styleable#KeyboardView_keyTextSize
+ * @attr ref R.styleable#KeyboardView_keyTextColor
+ * @attr ref R.styleable#KeyboardView_verticalCorrection
+ * @attr ref R.styleable#KeyboardView_popupLayout
  *
- * @deprecated This class is deprecated because this is just a convenient UI widget class that
+ * deprecated This class is deprecated because this is just a convenient UI widget class that
  *             application developers can re-implement on top of existing public APIs.  If you have
  *             already depended on this class, consider copying the implementation from AOSP into
  *             your project or re-implementing a similar widget by yourselves
  */
-@Deprecated
 public class KeyboardView extends View implements View.OnClickListener {
 
     /**
@@ -140,7 +139,6 @@ public class KeyboardView extends View implements View.OnClickListener {
 
     private Keyboard mKeyboard;
     private int mCurrentKeyIndex = NOT_A_KEY;
-    @UnsupportedAppUsage
     private int mLabelTextSize;
     private int mKeyTextSize;
     private int mKeyTextColor;
@@ -148,7 +146,6 @@ public class KeyboardView extends View implements View.OnClickListener {
     private int mShadowColor;
     private float mBackgroundDimAmount;
 
-    @UnsupportedAppUsage
     private TextView mPreviewText;
     private PopupWindow mPreviewPopup;
     private int mPreviewTextSizeLarge;
@@ -226,7 +223,6 @@ public class KeyboardView extends View implements View.OnClickListener {
     private float mOldPointerX;
     private float mOldPointerY;
 
-    @UnsupportedAppUsage
     private Drawable mKeyBackground;
 
     private static final int REPEAT_INTERVAL = 50; // ~20 keys per second
@@ -261,10 +257,17 @@ public class KeyboardView extends View implements View.OnClickListener {
     /** Whether the requirement of a headset to hear passwords if accessibility is enabled is announced. */
     private boolean mHeadsetRequiredToHearPasswordsAnnounced;
 
+    /* ????: These originate in View, but can't be accessed from there. */
+    private Context mContext;
+    private int mPaddingLeft = 0;
+    private int mPaddingRight = 0;
+    private int mPaddingTop = 0;
+    private int mPaddingBottom = 0;
+
     Handler mHandler;
 
     public KeyboardView(Context context, AttributeSet attrs) {
-        this(context, attrs, com.android.internal.R.attr.keyboardViewStyle);
+        this(context, attrs, R.attr.keyboardViewStyle);
     }
 
     public KeyboardView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -275,7 +278,7 @@ public class KeyboardView extends View implements View.OnClickListener {
         super(context, attrs, defStyleAttr, defStyleRes);
 
         TypedArray a = context.obtainStyledAttributes(
-                attrs, android.R.styleable.KeyboardView, defStyleAttr, defStyleRes);
+                attrs, R.styleable.KeyboardView, defStyleAttr, defStyleRes);
 
         LayoutInflater inflate =
                 (LayoutInflater) context
@@ -290,45 +293,47 @@ public class KeyboardView extends View implements View.OnClickListener {
             int attr = a.getIndex(i);
 
             switch (attr) {
-            case com.android.internal.R.styleable.KeyboardView_keyBackground:
+            case R.styleable.KeyboardView_keyBackground:
                 mKeyBackground = a.getDrawable(attr);
                 break;
-            case com.android.internal.R.styleable.KeyboardView_verticalCorrection:
+            case R.styleable.KeyboardView_verticalCorrection:
                 mVerticalCorrection = a.getDimensionPixelOffset(attr, 0);
                 break;
-            case com.android.internal.R.styleable.KeyboardView_keyPreviewLayout:
+            case R.styleable.KeyboardView_keyPreviewLayout:
                 previewLayout = a.getResourceId(attr, 0);
                 break;
-            case com.android.internal.R.styleable.KeyboardView_keyPreviewOffset:
+            case R.styleable.KeyboardView_keyPreviewOffset:
                 mPreviewOffset = a.getDimensionPixelOffset(attr, 0);
                 break;
-            case com.android.internal.R.styleable.KeyboardView_keyPreviewHeight:
+            case R.styleable.KeyboardView_keyPreviewHeight:
                 mPreviewHeight = a.getDimensionPixelSize(attr, 80);
                 break;
-            case com.android.internal.R.styleable.KeyboardView_keyTextSize:
+            case R.styleable.KeyboardView_keyTextSize:
                 mKeyTextSize = a.getDimensionPixelSize(attr, 18);
                 break;
-            case com.android.internal.R.styleable.KeyboardView_keyTextColor:
+            case R.styleable.KeyboardView_keyTextColor:
                 mKeyTextColor = a.getColor(attr, 0xFF000000);
                 break;
-            case com.android.internal.R.styleable.KeyboardView_labelTextSize:
+            case R.styleable.KeyboardView_labelTextSize:
                 mLabelTextSize = a.getDimensionPixelSize(attr, 14);
                 break;
-            case com.android.internal.R.styleable.KeyboardView_popupLayout:
+            case R.styleable.KeyboardView_popupLayout:
                 mPopupLayout = a.getResourceId(attr, 0);
                 break;
-            case com.android.internal.R.styleable.KeyboardView_shadowColor:
+            case R.styleable.KeyboardView_shadowColor:
                 mShadowColor = a.getColor(attr, 0);
                 break;
-            case com.android.internal.R.styleable.KeyboardView_shadowRadius:
+            case R.styleable.KeyboardView_shadowRadius:
                 mShadowRadius = a.getFloat(attr, 0f);
                 break;
             }
         }
+        a.recycle();
 
         a = mContext.obtainStyledAttributes(
-                com.android.internal.R.styleable.Theme);
-        mBackgroundDimAmount = a.getFloat(android.R.styleable.Theme_backgroundDimAmount, 0.5f);
+                R.styleable.KeyboardView);
+        mBackgroundDimAmount = a.getFloat(R.styleable.KeyboardView_backgroundDimAmount, 0.5f);
+        a.recycle();
 
         mPreviewPopup = new PopupWindow(context);
         if (previewLayout != 0) {
@@ -361,9 +366,10 @@ public class KeyboardView extends View implements View.OnClickListener {
 
         mSwipeThreshold = (int) (500 * getResources().getDisplayMetrics().density);
         mDisambiguateSwipe = getResources().getBoolean(
-                com.android.internal.R.bool.config_swipeDisambiguation);
+                R.bool.config_swipeDisambiguation);
 
-        mAccessibilityManager = AccessibilityManager.getInstance(context);
+        mAccessibilityManager = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
+                /* AccessibilityManager.getInstance(context); */
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
         resetMultiTap();
@@ -374,6 +380,7 @@ public class KeyboardView extends View implements View.OnClickListener {
         super.onAttachedToWindow();
         initGestureDetector();
         if (mHandler == null) {
+            /* TODO: This Handler class should be static or leaks might occur (anonymous android.os.Handler) */
             mHandler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
@@ -597,7 +604,7 @@ public class KeyboardView extends View implements View.OnClickListener {
     private CharSequence adjustCase(CharSequence label) {
         if (mKeyboard.isShifted() && label != null && label.length() < 3
                 && Character.isLowerCase(label.charAt(0))) {
-            label = label.toString().toUpperCase();
+            label = label.toString().toUpperCase(Locale.getDefault());
         }
         return label;
     }
@@ -920,7 +927,6 @@ public class KeyboardView extends View implements View.OnClickListener {
         }
     }
 
-    @UnsupportedAppUsage
     private void showKey(final int keyIndex) {
         final PopupWindow previewPopup = mPreviewPopup;
         final Key[] keys = mKeys;
@@ -1063,7 +1069,6 @@ public class KeyboardView extends View implements View.OnClickListener {
                 key.x + key.width + mPaddingLeft, key.y + key.height + mPaddingTop);
     }
 
-    @UnsupportedAppUsage
     private boolean openPopupIfRequired(MotionEvent me) {
         // Check if we have a popup layout specified first.
         if (mPopupLayout == 0) {
@@ -1099,9 +1104,9 @@ public class KeyboardView extends View implements View.OnClickListener {
                         Context.LAYOUT_INFLATER_SERVICE);
                 mMiniKeyboardContainer = inflater.inflate(mPopupLayout, null);
                 mMiniKeyboard = (KeyboardView) mMiniKeyboardContainer.findViewById(
-                        com.android.internal.R.id.keyboardView);
+                        R.id.keyboardView);
                 View closeButton = mMiniKeyboardContainer.findViewById(
-                        com.android.internal.R.id.closeButton);
+                        R.id.closeButton);
                 if (closeButton != null) closeButton.setOnClickListener(this);
                 mMiniKeyboard.setOnKeyboardActionListener(new OnKeyboardActionListener() {
                     public void onKey(int primaryCode, int[] keyCodes) {
@@ -1142,7 +1147,7 @@ public class KeyboardView extends View implements View.OnClickListener {
                 mMiniKeyboardCache.put(popupKey, mMiniKeyboardContainer);
             } else {
                 mMiniKeyboard = (KeyboardView) mMiniKeyboardContainer.findViewById(
-                        com.android.internal.R.id.keyboardView);
+                        R.id.keyboardView);
             }
             getLocationInWindow(mCoordinates);
             mPopupX = popupKey.x + mPaddingLeft;
@@ -1369,7 +1374,6 @@ public class KeyboardView extends View implements View.OnClickListener {
         return true;
     }
 
-    @UnsupportedAppUsage
     private boolean repeatKey() {
         Key key = mKeys[mRepeatKeyIndex];
         detectAndSendKey(mCurrentKey, key.x, key.y, mLastTapTime);
