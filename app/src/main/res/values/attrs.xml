@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- https://android.googlesource.com/platform/frameworks/base/+/8f4b5a561813ee8c22d2b8e73c33299471d4a3f3/core/res/res/values/attrs.xml -->
 <resources>
     <declare-styleable name="FilePicker">
         <attr name="workingDir" format="string"/>
@@ -9,6 +10,456 @@
         <attr name="regex" format="string"/>
         <attr name="preferenceName" format="string"/>
         <attr name="preferenceKey" format="string"/>
+    </declare-styleable>
+
+    <!-- These are the standard attributes that make up a complete theme. -->
+    <declare-styleable name="KeyboardView">
+    <!-- ============== -->
+    <!-- Generic styles -->
+    <!-- ============== -->
+    <eat-comment />
+    <!-- Default color of foreground imagery. -->
+    <attr name="colorForeground" format="color" />
+    <!-- Default color of foreground imagery on an inverted background. -->
+    <attr name="colorForegroundInverse" format="color" />
+    <!-- Color that matches (as closely as possible) the window background. -->
+    <attr name="colorBackground" format="color" />
+    <!-- Default disabled alpha for widgets that set enabled/disabled alpha programmatically. -->
+    <attr name="disabledAlpha" format="float" />
+    <!-- Default background dim amount when a menu, dialog, or something similar pops up. -->
+    <attr name="backgroundDimAmount" format="float" />
+    <!-- Control whether dimming behind the window is enabled.  The default
+         theme does not set this value, meaning it is based on whether the
+         window is floating. -->
+    <attr name="backgroundDimEnabled" format="boolean" />
+
+        <!-- =========== -->
+        <!-- Text styles -->
+        <!-- =========== -->
+        <eat-comment />
+        <!-- Default appearance of text: color, typeface, size, and style -->
+        <attr name="textAppearance" format="reference" />
+        <!-- Default appearance of text against an inverted background:
+             color, typeface, size, and style -->
+        <attr name="textAppearanceInverse" format="reference" />
+        <!-- The most prominent text color, for the  -->
+        <attr name="textColorPrimary" format="reference|color" />
+        <!-- Secondary text color -->
+        <attr name="textColorSecondary" format="reference|color" />
+        <!-- Tertiary text color -->
+        <attr name="textColorTertiary" format="reference|color" />
+        <!-- Primary inverse text color, useful for inverted backgrounds -->
+        <attr name="textColorPrimaryInverse" format="reference|color" />
+        <!-- Secondary inverse text color, useful for inverted backgrounds -->
+        <attr name="textColorSecondaryInverse" format="reference|color" />
+        <!-- Tertiary inverse text color, useful for inverted backgrounds -->
+        <attr name="textColorTertiaryInverse" format="reference|color" />
+        <!-- Inverse hint text color -->
+        <attr name="textColorHintInverse" format="reference|color" />
+        <!-- Bright text color. Only differentiates based on the disabled state. -->
+        <attr name="textColorPrimaryDisableOnly" format="reference|color" />
+        <!-- Bright inverse text color. Only differentiates based on the disabled state. -->
+        <attr name="textColorPrimaryInverseDisableOnly" format="reference|color" />
+        <!-- Bright text color. This does not differentiate the disabled state. As an example,
+             buttons use this since they display the disabled state via the background and not the
+             foreground text color. -->
+        <attr name="textColorPrimaryNoDisable" format="reference|color" />
+        <!-- Dim text color. This does not differentiate the disabled state. -->
+        <attr name="textColorSecondaryNoDisable" format="reference|color" />
+        <!-- Bright inverse text color. This does not differentiate the disabled state. -->
+        <attr name="textColorPrimaryInverseNoDisable" format="reference|color" />
+        <!-- Dim inverse text color. This does not differentiate the disabled state. -->
+        <attr name="textColorSecondaryInverseNoDisable" format="reference|color" />
+        <!-- Text color for urls in search suggestions, used by things like global search and the browser. @hide -->
+        <attr name="textColorSearchUrl" format="reference|color" />
+        <!-- Search widget more corpus result item background. -->
+        <attr name="searchWidgetCorpusItemBackground" format="reference|color" />
+        <!-- Text color, typeface, size, and style for "large" text. Defaults to primary text color. -->
+        <attr name="textAppearanceLarge" format="reference" />
+        <!-- Text color, typeface, size, and style for "medium" text. Defaults to primary text color. -->
+        <attr name="textAppearanceMedium" format="reference" />
+        <!-- Text color, typeface, size, and style for "small" text. Defaults to secondary text color. -->
+        <attr name="textAppearanceSmall" format="reference" />
+        <!-- Text color, typeface, size, and style for "large" inverse text. Defaults to primary inverse text color. -->
+        <attr name="textAppearanceLargeInverse" format="reference" />
+        <!-- Text color, typeface, size, and style for "medium" inverse text. Defaults to primary inverse text color. -->
+        <attr name="textAppearanceMediumInverse" format="reference" />
+        <!-- Text color, typeface, size, and style for "small" inverse text. Defaults to secondary inverse text color. -->
+        <attr name="textAppearanceSmallInverse" format="reference" />
+        <!-- Text color, typeface, size, and style for system search result title. Defaults to primary inverse text color. @hide -->
+        <attr name="textAppearanceSearchResultTitle" format="reference" />
+        <!-- Text color, typeface, size, and style for system search result subtitle. Defaults to primary inverse text color. @hide -->
+        <attr name="textAppearanceSearchResultSubtitle" format="reference" />
+        <!-- Text color, typeface, size, and style for the text inside of a button. -->
+        <attr name="textAppearanceButton" format="reference" />
+        <!-- A styled string, specifying the style to be used for showing
+             inline candidate text when composing with an input method.  The
+             text itself will be ignored, but the style spans will be applied
+             to the candidate text as it is edited. -->
+        <attr name="candidatesTextStyleSpans" format="reference|string" />
+        <!-- Drawable to use for check marks -->
+        <attr name="textCheckMark" format="reference" />
+        <attr name="textCheckMarkInverse" format="reference" />
+        <!-- Drawable to use for multiple choice indicators-->
+        <attr name="listChoiceIndicatorMultiple" format="reference" />
+        <!-- Drawable to use for single choice indicators-->
+        <attr name="listChoiceIndicatorSingle" format="reference" />
+        <!-- ============= -->
+        <!-- Button styles -->
+        <!-- ============= -->
+        <eat-comment />
+        <!-- Normal Button style. -->
+        <attr name="buttonStyle" format="reference" />
+        <!-- Small Button style. -->
+        <attr name="buttonStyleSmall" format="reference" />
+        <!-- Button style to inset into an EditText. -->
+        <attr name="buttonStyleInset" format="reference" />
+        <!-- ToggleButton style. -->
+        <attr name="buttonStyleToggle" format="reference" />
+        <!-- ============== -->
+        <!-- Gallery styles -->
+        <!-- ============== -->
+        <eat-comment />
+        <!-- The preferred background for gallery items. This should be set
+             as the background of any Views you provide from the Adapter. -->
+        <attr name="galleryItemBackground" format="reference" />
+        <!-- =========== -->
+        <!-- List styles -->
+        <!-- =========== -->
+        <eat-comment />
+        <!-- The preferred list item height -->
+        <attr name="listPreferredItemHeight" format="dimension" />
+        <!-- The drawable for the list divider -->
+        <!-- The list item height for search results. @hide -->
+        <attr name="searchResultListItemHeight" format="dimension" />
+        <attr name="listDivider" format="reference" />
+        <!-- TextView style for list separators. -->
+        <attr name="listSeparatorTextViewStyle" format="reference" />
+        <!-- The preferred left padding for an expandable list item (for child-specific layouts,
+             use expandableListPreferredChildPaddingLeft). This takes into account
+             the indicator that will be shown to next to the item. -->
+        <attr name="expandableListPreferredItemPaddingLeft" format="dimension" />
+        <!-- The preferred left padding for an expandable list item that is a child.
+             If this is not provided, it defaults to the expandableListPreferredItemPaddingLeft. -->
+        <attr name="expandableListPreferredChildPaddingLeft" format="dimension" />
+        <!-- The preferred left bound for an expandable list item's indicator. For a child-specific
+             indicator, use expandableListPreferredChildIndicatorLeft. -->
+        <attr name="expandableListPreferredItemIndicatorLeft" format="dimension" />
+        <!-- The preferred right bound for an expandable list item's indicator. For a child-specific
+             indicator, use expandableListPreferredChildIndicatorRight. -->
+        <attr name="expandableListPreferredItemIndicatorRight" format="dimension" />
+        <!-- The preferred left bound for an expandable list child's indicator. -->
+        <attr name="expandableListPreferredChildIndicatorLeft" format="dimension" />
+        <!-- The preferred right bound for an expandable list child's indicator. -->
+        <attr name="expandableListPreferredChildIndicatorRight" format="dimension" />
+        <!-- ============= -->
+        <!-- Window styles -->
+        <!-- ============= -->
+        <eat-comment />
+        <!-- Drawable to use as the overall window background.  There are a
+             few special considerations you should use when settings this
+             drawable:
+             <ul>
+             <li> This information will be used to infer the pixel format
+                  for your window's surface.  If the drawable has any
+                  non-opaque pixels, your window will be translucent
+                  (32 bpp).
+             <li> If you want to draw the entire background
+                  yourself, you should set this drawable to some solid
+                  color that closely matches that background (so the
+                  system's preview of your window will match), and
+                  then in code manually set your window's background to
+                  null so it will not be drawn.
+             </ul> -->
+        <attr name="windowBackground" format="reference" />
+        <!-- Drawable to use as a frame around the window. -->
+        <attr name="windowFrame" format="reference" />
+        <!-- Flag indicating whether there should be no title on this window. -->
+        <attr name="windowNoTitle" format="boolean" />
+        <!-- Flag indicating whether this window should fill the entire screen. -->
+        <attr name="windowFullscreen" format="boolean" />
+        <!-- Flag indicating whether this is a floating window. -->
+        <attr name="windowIsFloating" format="boolean" />
+        <!-- Flag indicating whether this is a translucent window. -->
+        <attr name="windowIsTranslucent" format="boolean" />
+        <!-- This Drawable is overlaid over the foreground of the Window's content area, usually
+             to place a shadow below the title.  -->
+        <attr name="windowContentOverlay" format="reference" />
+        <!-- The style resource to use for a window's title bar height. -->
+        <attr name="windowTitleSize" format="dimension" />
+        <!-- The style resource to use for a window's title text. -->
+        <attr name="windowTitleStyle" format="reference" />
+        <!-- The style resource to use for a window's title area. -->
+        <attr name="windowTitleBackgroundStyle" format="reference" />
+        <!-- Reference to a style resource holding
+             the set of window animations to use, which can be
+             any of the attributes defined by
+             {@link android.R.styleable#WindowAnimation}. -->
+        <attr name="windowAnimationStyle" format="reference" />
+        <!-- Defines the default soft input state that this window would
+             like when it is displayed. -->
+        <attr name="windowSoftInputMode">
+            <!-- Not specified, use what the system thinks is best.  This
+                 is the default. -->
+            <flag name="stateUnspecified" value="0" />
+            <!-- Leave the soft input window as-is, in whatever state it
+                 last was. -->
+            <flag name="stateUnchanged" value="1" />
+            <!-- Make the soft input area hidden when normally appropriate
+                 (when the user is navigating forward to your window). -->
+            <flag name="stateHidden" value="2" />
+            <!-- Always make the soft input area hidden when this window
+                 has input focus. -->
+            <flag name="stateAlwaysHidden" value="3" />
+            <!-- Make the soft input area visible when normally appropriate
+                 (when the user is navigating forward to your window). -->
+            <flag name="stateVisible" value="4" />
+            <!-- Always make the soft input area visible when this window
+                 has input focus. -->
+            <flag name="stateAlwaysVisible" value="5" />
+            <!-- The window resize/pan adjustment has not been specified,
+                 the system will automatically select between resize and pan
+                 modes, depending
+                 on whether the content of the window has any layout views
+                 that can scroll their contents.  If there is such a view,
+                 then the window will be resized, with the assumption being
+                 that the resizeable area can be reduced to make room for
+                 the input UI. -->
+            <flag name="adjustUnspecified" value="0x00" />
+            <!-- Always resize the window: the content area of the window is
+                 reduced to make room for the soft input area. -->
+            <flag name="adjustResize" value="0x10" />
+            <!-- Don't resize the window to make room for the soft input area;
+                 instead pan the contents of the window as focus moves inside
+                 of it so that the user can see what they are typing.  This is
+                 generally less desireable than panning because the user may
+                 need to close the input area to get at and interact with
+                 parts of the window. -->
+            <flag name="adjustPan" value="0x20" />
+        </attr>
+        <!-- Flag allowing you to disable the preview animation for a window.
+             The default value is false; if set to true, the system can never
+             use the window's theme to show a preview of it before your
+             actual instance is shown to the user. -->
+        <attr name="windowDisablePreview" format="boolean" />
+        <!-- Flag indicating that this window should not be displayed at all.
+             The default value is false; if set to true, and this window is
+             the main window of an Activity, then it will never actually
+             be added to the window manager.  This means that your activity
+             must immediately quit without waiting for user interaction,
+             because there will be no such interaction coming. -->
+        <attr name="windowNoDisplay" format="boolean" />
+        <!-- ============ -->
+        <!-- Alert Dialog styles -->
+        <!-- ============ -->
+        <eat-comment />
+        <attr name="alertDialogStyle" format="reference" />
+        <!-- ============ -->
+        <!-- Panel styles -->
+        <!-- ============ -->
+        <eat-comment />
+        <!-- The background of a panel when it is inset from the left and right edges of the screen. -->
+        <attr name="panelBackground" format="reference|color" />
+        <!-- The background of a panel when it extends to the left and right edges of the screen. -->
+        <attr name="panelFullBackground" format="reference|color" />
+        <!-- Default color of foreground panel imagery. -->
+        <attr name="panelColorForeground" format="reference|color" />
+        <!-- Color that matches (as closely as possible) the panel background. -->
+        <attr name="panelColorBackground" format="reference|color" />
+        <!-- Default appearance of panel text. -->
+        <attr name="panelTextAppearance" format="reference" />
+        <!-- =================== -->
+        <!-- Other widget styles -->
+        <!-- =================== -->
+        <eat-comment />
+        <!-- Default AbsListView style. -->
+        <attr name="absListViewStyle" format="reference" />
+        <!-- Default AutoCompleteTextView style. -->
+        <attr name="autoCompleteTextViewStyle" format="reference" />
+        <!-- Default Checkbox style. -->
+        <attr name="checkboxStyle" format="reference" />
+        <!-- Default ListView style for drop downs. -->
+        <attr name="dropDownListViewStyle" format="reference" />
+        <!-- Default EditText style. -->
+        <attr name="editTextStyle" format="reference" />
+        <!-- Default ExpandableListView style. -->
+        <attr name="expandableListViewStyle" format="reference" />
+        <!-- Default Gallery style. -->
+        <attr name="galleryStyle" format="reference" />
+        <!-- Default GestureOverlayView style. -->
+        <attr name="gestureOverlayViewStyle" format="reference" />
+        <!-- Default GridView style. -->
+        <attr name="gridViewStyle" format="reference" />
+        <!-- The style resource to use for an ImageButton -->
+        <attr name="imageButtonStyle" format="reference" />
+        <!-- The style resource to use for an ImageButton that is an image well -->
+        <attr name="imageWellStyle" format="reference" />
+        <!-- Default ListView style. -->
+        <attr name="listViewStyle" format="reference" />
+        <!-- ListView with white background. -->
+        <attr name="listViewWhiteStyle" format="reference" />
+        <!-- Default PopupWindow style. -->
+        <attr name="popupWindowStyle" format="reference" />
+        <!-- Default ProgressBar style. This is a medium circular progress bar. -->
+        <attr name="progressBarStyle" format="reference" />
+        <!-- Horizontal ProgressBar style. This is a horizontal progress bar. -->
+        <attr name="progressBarStyleHorizontal" format="reference" />
+        <!-- Small ProgressBar style. This is a small circular progress bar. -->
+        <attr name="progressBarStyleSmall" format="reference" />
+        <!-- Small ProgressBar in title style. This is a small circular progress bar that will be placed in title bars. -->
+        <attr name="progressBarStyleSmallTitle" format="reference" />
+        <!-- Large ProgressBar style. This is a large circular progress bar. -->
+        <attr name="progressBarStyleLarge" format="reference" />
+        <!-- Inverse ProgressBar style. This is a medium circular progress bar. -->
+        <attr name="progressBarStyleInverse" format="reference" />
+        <!-- Small inverse ProgressBar style. This is a small circular progress bar. -->
+        <attr name="progressBarStyleSmallInverse" format="reference" />
+        <!-- Large inverse ProgressBar style. This is a large circular progress bar. -->
+        <attr name="progressBarStyleLargeInverse" format="reference" />
+        <!-- Default SeekBar style. -->
+        <attr name="seekBarStyle" format="reference" />
+        <!-- Default RatingBar style. -->
+        <attr name="ratingBarStyle" format="reference" />
+        <!-- Indicator RatingBar style. -->
+        <attr name="ratingBarStyleIndicator" format="reference" />
+        <!-- Small indicator RatingBar style. -->
+        <attr name="ratingBarStyleSmall" format="reference" />
+        <!-- Default RadioButton style. -->
+        <attr name="radioButtonStyle" format="reference" />
+        <!-- Default ScrollView style. -->
+        <attr name="scrollViewStyle" format="reference" />
+        <!-- Default HorizontalScrollView style. -->
+        <attr name="horizontalScrollViewStyle" format="reference" />
+        <!-- Default Spinner style. -->
+        <attr name="spinnerStyle" format="reference" />
+        <!-- Default Star style. -->
+        <attr name="starStyle" format="reference" />
+        <!-- Default TabWidget style. -->
+        <attr name="tabWidgetStyle" format="reference" />
+        <!-- Default TextView style. -->
+        <attr name="textViewStyle" format="reference" />
+        <!-- Default WebView style. -->
+        <attr name="webViewStyle" format="reference" />
+        <!-- Default style for drop down items. -->
+        <attr name="dropDownItemStyle" format="reference" />
+        <!-- Default style for spinner drop down items. -->
+        <attr name="spinnerDropDownItemStyle" format="reference" />
+        <!-- Default style for drop down hints. -->
+        <attr name="dropDownHintAppearance" format="reference" />
+        <!-- Default spinner item style. -->
+        <attr name="spinnerItemStyle" format="reference" />
+        <!-- Default MapView style. -->
+        <attr name="mapViewStyle" format="reference" />
+        <!-- =================== -->
+        <!-- Preference styles   -->
+        <!-- =================== -->
+        <eat-comment />
+        <!-- Default style for PreferenceScreen. -->
+        <attr name="preferenceScreenStyle" format="reference" />
+        <!-- Default style for PreferenceCategory. -->
+        <attr name="preferenceCategoryStyle" format="reference" />
+        <!-- Default style for Preference. -->
+        <attr name="preferenceStyle" format="reference" />
+        <!-- Default style for informational Preference. -->
+        <attr name="preferenceInformationStyle" format="reference" />
+        <!-- Default style for CheckBoxPreference. -->
+        <attr name="checkBoxPreferenceStyle" format="reference" />
+        <!-- Default style for YesNoPreference. -->
+        <attr name="yesNoPreferenceStyle" format="reference" />
+        <!-- Default style for DialogPreference. -->
+        <attr name="dialogPreferenceStyle" format="reference" />
+        <!-- Default style for EditTextPreference. -->
+        <attr name="editTextPreferenceStyle" format="reference" />
+        <!-- Default style for RingtonePreference. -->
+        <attr name="ringtonePreferenceStyle" format="reference" />
+        <!-- The preference layout that has the child/tabbed effect. -->
+        <attr name="preferenceLayoutChild" format="reference" />
+    <!-- </declare-styleable>
+
+    <declare-styleable name="KeyboardView"> -->
+        <!-- Default KeyboardView style. -->
+        <attr name="keyboardViewStyle" format="reference" />
+        <!-- Image for the key. This image needs to be a StateListDrawable, with the following
+             possible states: normal, pressed, checkable, checkable+pressed, checkable+checked,
+             checkable+checked+pressed. -->
+        <attr name="keyBackground" format="reference" />
+        <!-- Size of the text for character keys. -->
+        <attr name="keyTextSize" format="dimension" />
+        <!-- Size of the text for custom keys with some text and no icon. -->
+        <attr name="labelTextSize" format="dimension" />
+        <!-- Color to use for the label in a key -->
+        <attr name="keyTextColor" format="color" />
+        <!-- Layout resource for key press feedback.-->
+        <attr name="keyPreviewLayout" format="reference" />
+        <!-- Vertical offset of the key press feedback from the key. -->
+        <attr name="keyPreviewOffset" format="dimension" />
+        <!-- Height of the key press feedback popup. -->
+        <attr name="keyPreviewHeight" format="dimension" />
+        <!-- Amount to offset the touch Y coordinate by, for bias correction. -->
+        <attr name="verticalCorrection" format="dimension" />
+        <!-- Layout resource for popup keyboards -->
+        <attr name="popupLayout" format="reference" />
+        <attr name="shadowColor" format="color" />
+        <attr name="shadowRadius" format="float" />
+    </declare-styleable>
+    <declare-styleable name="KeyboardViewPreviewState">
+        <!-- State for {@link android.inputmethodservice.KeyboardView KeyboardView}
+                key preview background -->
+        <attr name="state_long_pressable" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="Keyboard">
+        <!-- Default width of a key, in pixels or percentage of display width -->
+        <attr name="keyWidth" format="dimension|fraction" />
+        <!-- Default height of a key, in pixels or percentage of display width -->
+        <attr name="keyHeight" format="dimension|fraction" />
+        <!-- Default horizontal gap between keys -->
+        <attr name="horizontalGap" format="dimension|fraction" />
+        <!-- Default vertical gap between rows of keys -->
+        <attr name="verticalGap" format="dimension|fraction" />
+    </declare-styleable>
+    <declare-styleable name="Keyboard_Row">
+        <!-- Row edge flags-->
+        <attr name="rowEdgeFlags">
+            <!-- Row is anchored to the top of the keyboard -->
+            <flag name="top" value="4" />
+            <!-- Row is anchored to the bottom of the keyboard -->
+            <flag name="bottom" value="8" />
+        </attr>
+        <!-- Mode of the keyboard. If the mode doesn't match the
+             requested keyboard mode, the row will be skipped -->
+        <attr name="keyboardMode" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="Keyboard_Key">
+        <!-- The unicode value or comma-separated values that this key outputs -->
+        <attr name="codes" format="integer|string" />
+        <!-- The XML keyboard layout of any popup keyboard -->
+        <attr name="popupKeyboard" format="reference" />
+        <!-- The characters to display in the popup keyboard -->
+        <attr name="popupCharacters" format="string" />
+        <!-- Key edge flags -->
+        <attr name="keyEdgeFlags">
+            <!-- Key is anchored to the left of the keyboard -->
+            <flag name="left" value="1" />
+            <!-- Key is anchored to the right of the keyboard -->
+            <flag name="right" value="2" />
+        </attr>
+        <!-- Whether this is a modifier key such as Alt or Shift -->
+        <attr name="isModifier" format="boolean" />
+        <!-- Whether this is a toggle key -->
+        <attr name="isSticky" format="boolean" />
+        <!-- Whether long-pressing on this key will make it repeat -->
+        <attr name="isRepeatable" format="boolean" />
+        <!-- The icon to show in the popup preview -->
+        <attr name="iconPreview" format="reference" />
+        <!-- The string of characters to output when this key is pressed -->
+        <attr name="keyOutputText" format="string" />
+        <!-- The label to display on the key -->
+        <attr name="keyLabel" format="string" />
+        <!-- The icon to display on the key instead of the label -->
+        <attr name="keyIcon" format="reference" />
+        <!-- Mode of the keyboard. If the mode doesn't match the
+             requested keyboard mode, the key will be skipped -->
+        <attr name="keyboardMode" />
     </declare-styleable>
 </resources>
 
